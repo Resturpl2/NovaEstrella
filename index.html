@@ -47,6 +47,44 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* Animasi Slide In */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Animasi Bounce */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Animasi Pulse */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animasi Rotate */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Animasi Glow */
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--highlight); }
+            50% { box-shadow: 0 0 20px var(--highlight); }
+            100% { box-shadow: 0 0 5px var(--highlight); }
+        }
+        
         .fade-in {
             animation: fadeIn 0.8s ease forwards;
         }
@@ -64,6 +102,30 @@
         .fade-in-delay-3 {
             animation: fadeIn 0.8s ease 0.6s forwards;
             opacity: 0;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+        
+        .bounce {
+            animation: bounce 1s;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .rotate {
+            animation: rotate 2s linear infinite;
+        }
+        
+        .glow {
+            animation: glow 2s infinite;
         }
         
         /* Header Styles */
@@ -722,7 +784,7 @@
     <section class="hero">
         <div class="container">
             <h2 class="fade-in">Kelas XI RPL 2</h2>
-            <p class="fade-in-delay-1">“Dengan semangat kebersamaan, kami melangkah maju menuju masa depan gemilang.”Bersatu kita teguh, bercerai kita runtuh.Mari wujudkan kelas yang berprestasi dan berkarakter!</p>
+            <p class="fade-in-delay-1">"Dengan semangat kebersamaan, kami melangkah maju menuju masa depan gemilang." Bersatu kita teguh, bercerai kita runtuh. Mari wujudkan kelas yang berprestasi dan berkarakter!</p>
         </div>
     </section>
 
@@ -770,169 +832,136 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Lengkap</th>
-                            <th>Jenis Kelamin</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
                             <td>ABDILLAH MUHANNAD AL FUZEA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>AHMAD DWI ANDIKA PUTRA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>ANANDA RESTU KURNIA SANDI</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>ANANDITA VINZA PURWANDINI</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>ANDRIAN SAPUTRI</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>6</td>
                             <td>AURA KASIH FARADITA</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>7</td>
                             <td>BAGAS TRI WIDIANTO</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>8</td>
                             <td>BAYU PUTRA YUDHA PRATAMA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>9</td>
                             <td>BRYANSYAH HUTAMA PUTRA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>10</td>
                             <td>CHOIRUL ANAM FIRMANSYAH</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>11</td>
                             <td>CINDY EKA MAHARDITA</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>12</td>
                             <td>CYNTHIA WANDARI JULIANA</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>13</td>
                             <td>DELA AULIA SINTYA DINI</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>14</td>
                             <td>DINA FEBRIANI</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>15</td>
                             <td>EKA APRILIA CAHYANI</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>16</td>
                             <td>ELI MUNAWAROH</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>17</td>
                             <td>FADHLAN EL FAUZI</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>18</td>
                             <td>FAJAR ARGA ARDIANSYAH</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>19</td>
                             <td>FALENTINUS WAIRIPITS</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>20</td>
                             <td>FEBRI RIZKY DWI SAPUTRA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>21</td>
                             <td>FIKA</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>22</td>
                             <td>HALIMATUS ZAHRO</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>23</td>
                             <td>IFAN PRAS SETIAWAN</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>24</td>
                             <td>JENI AULIA NURCAHYA</td>
-                            <td>Perempuan</td>
                         </tr>
                         <tr>
                             <td>25</td>
                             <td>M. ALI RIDHO</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>26</td>
                             <td>MAYKO BINTANG SAPUTRA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>27</td>
                             <td>M. JHUVE DAVASYAH R.H</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>28</td>
                             <td>MOCH ROIHAN SAPUTRA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>29</td>
                             <td>M. REZA</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>30</td>
                             <td>M. RIZKY</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>31</td>
                             <td>MUH. AL FARIZI</td>
-                            <td>Laki-laki</td>
                         </tr>
                         <tr>
                             <td>32</td>
                             <td>QIAN ARIS AHMAD YANI</td>
-                            <td>Laki-laki</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1075,7 +1104,7 @@
             <div class="struktur-kelas">
                 <div class="wali-kelas fade-in">
                     <h3>Wali Kelas</h3>
-                    <p>FAUZI DANA LISDYANDA</p>
+                    <p>Bapak Fauzi</p>
                 </div>
                 <div class="ketua-kelas">
                     <div class="ketua fade-in">
@@ -1196,7 +1225,27 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
+                    // Tambahkan kelas animasi berdasarkan posisi elemen
+                    if (entry.target.classList.contains('section')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('card')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('piket-card')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('jadwal-hari')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('mapel-item')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('wali-kelas')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('ketua')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('wakil')) {
+                        entry.target.classList.add('fade-in');
+                    } else if (entry.target.classList.contains('seksi-card')) {
+                        entry.target.classList.add('fade-in');
+                    }
+                    
                     observer.unobserve(entry.target);
                 }
             });
@@ -1208,6 +1257,41 @@
             
             elementsToAnimate.forEach(el => {
                 observer.observe(el);
+            });
+            
+            // Tambahkan efek animasi khusus untuk beberapa elemen
+            const logo = document.querySelector('.logo i');
+            logo.addEventListener('mouseenter', () => {
+                logo.classList.add('rotate');
+            });
+            logo.addEventListener('mouseleave', () => {
+                logo.classList.remove('rotate');
+            });
+            
+            // Animasi untuk card dashboard saat hover
+            const dashboardCards = document.querySelectorAll('.dashboard-cards .card');
+            dashboardCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('pulse');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('pulse');
+                });
+            });
+            
+            // Animasi untuk tombol menu mobile
+            mobileMenuBtn.addEventListener('mouseenter', () => {
+                mobileMenuBtn.classList.add('bounce');
+            });
+            mobileMenuBtn.addEventListener('mouseleave', () => {
+                mobileMenuBtn.classList.remove('bounce');
+            });
+            
+            // Animasi untuk tabel data siswa
+            const tableRows = document.querySelectorAll('#siswa tbody tr');
+            tableRows.forEach((row, index) => {
+                row.style.animationDelay = `${index * 0.05}s`;
+                row.classList.add('fade-in');
             });
         });
     </script>
