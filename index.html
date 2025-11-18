@@ -8,17 +8,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #0f3460;
-            --highlight: #e94560;
-            --light: #f5f5f5;
-            --dark: #0d0d1a;
-            --success: #00b894;
-            --warning: #fdcb6e;
-            --info: #0984e3;
-            --text: #ffffff;
-            --text-secondary: #b8b8b8;
+            --primary: rgb(8, 12, 18);
+            --secondary: rgb(16, 20, 28);
+            --accent: rgb(24, 28, 40);
+            --highlight: rgb(0, 150, 255);
+            --highlight-glow: rgb(80, 180, 255);
+            --light: rgb(248, 250, 252);
+            --dark: rgb(4, 6, 10);
+            --success: rgb(0, 200, 83);
+            --warning: rgb(255, 160, 0);
+            --info: rgb(0, 120, 255);
+            --text: rgb(230, 235, 240);
+            --text-secondary: rgb(150, 160, 175);
+            --gradient-primary: linear-gradient(135deg, rgb(8, 12, 18) 0%, rgb(16, 20, 28) 100%);
+            --gradient-secondary: linear-gradient(135deg, rgb(16, 20, 28) 0%, rgb(24, 28, 40) 100%);
+            --gradient-accent: linear-gradient(135deg, rgb(0, 150, 255) 0%, rgb(80, 180, 255) 100%);
+            --gradient-card: linear-gradient(135deg, rgba(24, 28, 40, 0.9) 0%, rgba(0, 150, 255, 0.1) 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -29,60 +36,61 @@
         }
         
         body {
-            background-color: var(--dark);
+            background-color: var(--primary);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
+        /* Background dengan bintang-bintang yang sederhana */
+        .stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.3;
         }
         
-        /* Animasi Fade In */
+        .star {
+            position: absolute;
+            background-color: rgb(255, 255, 255);
+            border-radius: 50%;
+            animation: subtle-twinkle 8s infinite ease-in-out;
+        }
+        
+        @keyframes subtle-twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Efek nebula yang halus */
+        .nebula {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(80, 180, 255, 0.05) 0%, transparent 40%);
+            animation: subtle-float 30s infinite ease-in-out;
+        }
+        
+        @keyframes subtle-float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-5px, 5px); }
+        }
+        
+        /* Animasi Fade In yang halus */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Animasi Slide In */
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        /* Animasi Bounce */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-        
-        /* Animasi Pulse */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        /* Animasi Rotate */
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Animasi Glow */
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--highlight); }
-            50% { box-shadow: 0 0 20px var(--highlight); }
-            100% { box-shadow: 0 0 5px var(--highlight); }
         }
         
         .fade-in {
@@ -104,40 +112,24 @@
             opacity: 0;
         }
         
-        .slide-in-left {
-            animation: slideInLeft 0.8s ease forwards;
-        }
-        
-        .slide-in-right {
-            animation: slideInRight 0.8s ease forwards;
-        }
-        
-        .bounce {
-            animation: bounce 1s;
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        .rotate {
-            animation: rotate 2s linear infinite;
-        }
-        
-        .glow {
-            animation: glow 2s infinite;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
         /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            background: rgba(8, 12, 18, 0.9);
+            color: var(--text);
             padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 100;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 150, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .header-content {
@@ -155,7 +147,7 @@
         }
         
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .logo i {
@@ -165,13 +157,13 @@
         }
         
         .logo:hover i {
-            transform: rotate(15deg);
+            transform: rotate(10deg);
         }
         
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 600;
-            background: linear-gradient(to right, var(--highlight), var(--info));
+            background: var(--gradient-accent);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -184,11 +176,11 @@
         }
         
         .nav-menu a {
-            color: white;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
             padding: 8px 15px;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -200,7 +192,7 @@
             height: 2px;
             bottom: 0;
             left: 50%;
-            background-color: var(--highlight);
+            background: var(--gradient-accent);
             transition: all 0.3s ease;
         }
         
@@ -217,7 +209,7 @@
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: var(--text);
             font-size: 1.5rem;
             cursor: pointer;
             transition: transform 0.3s ease;
@@ -230,37 +222,30 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.85)), url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 4rem 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 150, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(24, 28, 40, 0.05) 0%, transparent 50%),
+                var(--gradient-primary);
+            color: var(--text);
+            padding: 5rem 0;
             text-align: center;
             margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 65%, rgba(233, 69, 96, 0.1) 70%, transparent 75%);
-            animation: shine 3s infinite linear;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .hero p {
@@ -279,34 +264,21 @@
         }
         
         .card {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: var(--gradient-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             padding: 1.5rem;
             transition: all 0.3s ease;
-            border-left: 4px solid var(--highlight);
+            border: 1px solid rgba(0, 150, 255, 0.2);
             position: relative;
             overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .card:hover::before {
-            left: 100%;
+            backdrop-filter: blur(10px);
         }
         
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(80, 180, 255, 0.4);
         }
         
         .card-icon {
@@ -317,13 +289,13 @@
         }
         
         .card:hover .card-icon {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         
         .card h3 {
             font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            color: var(--highlight);
+            color: var(--text);
         }
         
         .card p {
@@ -332,17 +304,19 @@
         
         /* Section Styles */
         .section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: var(--gradient-card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             padding: 1.5rem;
             margin-bottom: 2rem;
-            border-top: 3px solid var(--highlight);
+            border: 1px solid rgba(0, 150, 255, 0.2);
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .section:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(80, 180, 255, 0.4);
         }
         
         .section-header {
@@ -351,37 +325,44 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 150, 255, 0.2);
         }
         
         .section-title {
             font-size: 1.5rem;
-            color: var(--highlight);
+            color: var(--text);
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
+        .section-title i {
+            color: var(--highlight);
+        }
+        
         /* Table Styles */
         .table-responsive {
             overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
             min-width: 600px;
+            background: var(--secondary);
         }
         
         th, td {
             padding: 12px 15px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 150, 255, 0.2);
         }
         
         th {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--highlight);
+            background-color: var(--accent);
+            color: var(--text);
             font-weight: 600;
         }
         
@@ -390,8 +371,7 @@
         }
         
         tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
+            background-color: rgba(0, 150, 255, 0.05);
         }
         
         /* Piket Grid */
@@ -402,23 +382,29 @@
         }
         
         .piket-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--secondary);
             border-radius: 8px;
             padding: 1rem;
             text-align: center;
-            border-left: 4px solid var(--highlight);
+            border: 1px solid rgba(0, 150, 255, 0.2);
             transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
         
         .piket-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(80, 180, 255, 0.4);
         }
         
         .piket-day {
             font-weight: 600;
             color: var(--highlight);
             margin-bottom: 0.5rem;
+        }
+        
+        .piket-members {
+            color: var(--text-secondary);
         }
         
         /* Jadwal Styles */
@@ -430,13 +416,15 @@
             margin-bottom: 2rem;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 150, 255, 0.2);
         }
         
         .jadwal-hari:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(80, 180, 255, 0.4);
         }
         
         .jadwal-hari:last-child {
@@ -444,8 +432,8 @@
         }
         
         .hari-header {
-            background: linear-gradient(135deg, var(--accent), var(--highlight));
-            color: white;
+            background: var(--gradient-accent);
+            color: var(--light);
             font-weight: 600;
             padding: 15px;
             text-align: center;
@@ -457,43 +445,28 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
             padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--secondary);
         }
         
         .mapel-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--secondary);
             padding: 15px 10px;
             border-radius: 8px;
             text-align: center;
-            border-left: 4px solid var(--highlight);
+            border: 1px solid rgba(0, 150, 255, 0.2);
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .mapel-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .mapel-item:hover::before {
-            left: 100%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
         
         .mapel-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-color: rgba(80, 180, 255, 0.4);
         }
         
         .mapel-nama {
             font-weight: 600;
-            color: var(--highlight);
+            color: var(--text);
             margin-bottom: 5px;
         }
         
@@ -502,82 +475,80 @@
             color: var(--text-secondary);
         }
         
-        /* Struktur Kelas */
+        /* Struktur Kelas - DIPERBAIKI DENGAN 4 BAGIAN UTAMA */
         .struktur-kelas {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
         
-        .wali-kelas {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            border: 2px solid var(--highlight);
-            transition: all 0.3s ease;
-        }
-        
-        .wali-kelas:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .ketua-kelas {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        .ketua, .wakil {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            flex: 1;
-            margin: 0 10px;
-            border: 2px solid var(--accent);
-            transition: all 0.3s ease;
-        }
-        
-        .ketua:hover, .wakil:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .seksi {
+        .struktur-utama {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
             width: 100%;
+            max-width: 800px;
         }
         
-        .seksi-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
+        .struktur-item {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 12px;
             text-align: center;
-            border: 2px solid var(--info);
+            border: 2px solid rgba(0, 150, 255, 0.3);
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .seksi-card:hover {
+        .struktur-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 150, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .struktur-item:hover::before {
+            left: 100%;
+        }
+        
+        .struktur-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(80, 180, 255, 0.6);
+        }
+        
+        .struktur-item.wali-kelas {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--secondary) 0%, rgba(0, 150, 255, 0.2) 100%);
+        }
+        
+        .struktur-item h3 {
+            font-size: 1.3rem;
+            color: var(--highlight);
+            margin-bottom: 1rem;
+        }
+        
+        .struktur-item p {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 500;
         }
         
         /* Footer */
         footer {
             background: var(--dark);
-            color: white;
+            color: var(--text);
             padding: 2rem 0;
             text-align: center;
             margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(0, 150, 255, 0.2);
         }
         
         .footer-content {
@@ -596,7 +567,7 @@
         }
         
         .footer-logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .social-links {
@@ -605,7 +576,7 @@
         }
         
         .social-links a {
-            color: white;
+            color: var(--text-secondary);
             font-size: 1.2rem;
             transition: all 0.3s ease;
             display: inline-block;
@@ -613,7 +584,46 @@
         
         .social-links a:hover {
             color: var(--highlight);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+        }
+        
+        /* RGB Elements */
+        .rgb-element {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.1;
+            z-index: -1;
+            animation: rgb-move 15s infinite ease-in-out;
+        }
+        
+        .rgb-1 {
+            background: rgb(0, 150, 255);
+            top: 10%;
+            left: 10%;
+        }
+        
+        .rgb-2 {
+            background: rgb(0, 255, 150);
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+        
+        .rgb-3 {
+            background: rgb(255, 0, 150);
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes rgb-move {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -20px) scale(1.1); }
+            50% { transform: translate(-20px, 30px) scale(0.9); }
+            75% { transform: translate(20px, 20px) scale(1.05); }
         }
         
         /* Responsive Styles */
@@ -649,13 +659,15 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: linear-gradient(135deg, var(--primary), var(--secondary));
+                background: rgba(8, 12, 18, 0.95);
                 padding: 1rem 0;
                 text-align: center;
                 gap: 0;
                 margin-top: 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                box-shadow: var(--shadow);
                 z-index: 99;
+                border-top: 1px solid rgba(0, 150, 255, 0.2);
+                backdrop-filter: blur(10px);
             }
             
             .nav-menu.active {
@@ -690,13 +702,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .ketua-kelas {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .ketua, .wakil {
-                margin: 0;
+            .struktur-utama {
+                grid-template-columns: 1fr;
             }
             
             .piket-grid {
@@ -705,6 +712,12 @@
             
             .jadwal-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .rgb-element {
+                width: 150px;
+                height: 150px;
+                filter: blur(40px);
             }
         }
         
@@ -733,8 +746,10 @@
                 grid-template-columns: 1fr;
             }
             
-            .seksi {
-                grid-template-columns: 1fr;
+            .rgb-element {
+                width: 100px;
+                height: 100px;
+                filter: blur(30px);
             }
         }
         
@@ -758,6 +773,15 @@
     </style>
 </head>
 <body>
+    <!-- Background Elements -->
+    <div class="stars-background" id="starsBackground"></div>
+    <div class="nebula"></div>
+    
+    <!-- RGB Background Elements -->
+    <div class="rgb-element rgb-1"></div>
+    <div class="rgb-element rgb-2"></div>
+    <div class="rgb-element rgb-3"></div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -783,8 +807,10 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h2 class="fade-in">Kelas XI RPL 2</h2>
-            <p class="fade-in-delay-1">"Dengan semangat kebersamaan, kami melangkah maju menuju masa depan gemilang." Bersatu kita teguh, bercerai kita runtuh. Mari wujudkan kelas yang berprestasi dan berkarakter!</p>
+            <div class="hero-content">
+                <h2 class="fade-in">Kelas XI RPL 2</h2>
+                <p class="fade-in-delay-1">"Dengan semangat kebersamaan, kami melangkah maju menuju masa depan gemilang." Bersatu kita teguh, bercerai kita runtuh. Mari wujudkan kelas yang berprestasi dan berkarakter!</p>
+            </div>
         </div>
     </section>
 
@@ -835,134 +861,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>ABDILLAH MUHANNAD AL FUZEA</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>AHMAD DWI ANDIKA PUTRA</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>ANANDA RESTU KURNIA SANDI</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>ANANDITA VINZA PURWANDINI</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>ANDRIAN SAPUTRI</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>AURA KASIH FARADITA</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>BAGAS TRI WIDIANTO</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>BAYU PUTRA YUDHA PRATAMA</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>BRYANSYAH HUTAMA PUTRA</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>CHOIRUL ANAM FIRMANSYAH</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>CINDY EKA MAHARDITA</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>CYNTHIA WANDARI JULIANA</td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td>DELA AULIA SINTYA DINI</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>DINA FEBRIANI</td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td>EKA APRILIA CAHYANI</td>
-                        </tr>
-                        <tr>
-                            <td>16</td>
-                            <td>ELI MUNAWAROH</td>
-                        </tr>
-                        <tr>
-                            <td>17</td>
-                            <td>FADHLAN EL FAUZI</td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>FAJAR ARGA ARDIANSYAH</td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>FALENTINUS WAIRIPITS</td>
-                        </tr>
-                        <tr>
-                            <td>20</td>
-                            <td>FEBRI RIZKY DWI SAPUTRA</td>
-                        </tr>
-                        <tr>
-                            <td>21</td>
-                            <td>FIKA</td>
-                        </tr>
-                        <tr>
-                            <td>22</td>
-                            <td>HALIMATUS ZAHRO</td>
-                        </tr>
-                        <tr>
-                            <td>23</td>
-                            <td>IFAN PRAS SETIAWAN</td>
-                        </tr>
-                        <tr>
-                            <td>24</td>
-                            <td>JENI AULIA NURCAHYA</td>
-                        </tr>
-                        <tr>
-                            <td>25</td>
-                            <td>M. ALI RIDHO</td>
-                        </tr>
-                        <tr>
-                            <td>26</td>
-                            <td>MAYKO BINTANG SAPUTRA</td>
-                        </tr>
-                        <tr>
-                            <td>27</td>
-                            <td>M. JHUVE DAVASYAH R.H</td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td>MOCH ROIHAN SAPUTRA</td>
-                        </tr>
-                        <tr>
-                            <td>29</td>
-                            <td>M. REZA</td>
-                        </tr>
-                        <tr>
-                            <td>30</td>
-                            <td>M. RIZKY</td>
-                        </tr>
-                        <tr>
-                            <td>31</td>
-                            <td>MUH. AL FARIZI</td>
-                        </tr>
-                        <tr>
-                            <td>32</td>
-                            <td>QIAN ARIS AHMAD YANI</td>
-                        </tr>
+                        <!-- Data siswa tetap sama -->
+                        <tr><td>1</td><td>ABDILLAH MUHANNAD AL FUZEA</td></tr>
+                        <tr><td>2</td><td>AHMAD DWI ANDIKA PUTRA</td></tr>
+                        <tr><td>3</td><td>ANANDA RESTU KURNIA SANDI</td></tr>
+                        <tr><td>4</td><td>ANANDITA VINZA PURWANDINI</td></tr>
+                        <tr><td>5</td><td>ANDRIAN SAPUTRI</td></tr>
+                        <tr><td>6</td><td>AURA KASIH FARADITA</td></tr>
+                        <tr><td>7</td><td>BAGAS TRI WIDIANTO</td></tr>
+                        <tr><td>8</td><td>BAYU PUTRA YUDHA PRATAMA</td></tr>
+                        <tr><td>9</td><td>BRYANSYAH HUTAMA PUTRA</td></tr>
+                        <tr><td>10</td><td>CHOIRUL ANAM FIRMANSYAH</td></tr>
+                        <tr><td>11</td><td>CINDY EKA MAHARDITA</td></tr>
+                        <tr><td>12</td><td>CYNTHIA WANDARI JULIANA</td></tr>
+                        <tr><td>13</td><td>DELA AULIA SINTYA DINI</td></tr>
+                        <tr><td>14</td><td>DINA FEBRIANI</td></tr>
+                        <tr><td>15</td><td>EKA APRILIA CAHYANI</td></tr>
+                        <tr><td>16</td><td>ELI MUNAWAROH</td></tr>
+                        <tr><td>17</td><td>FADHLAN EL FAUZI</td></tr>
+                        <tr><td>18</td><td>FAJAR ARGA ARDIANSYAH</td></tr>
+                        <tr><td>19</td><td>FALENTINUS WAIRIPITS</td></tr>
+                        <tr><td>20</td><td>FEBRI RIZKY DWI SAPUTRA</td></tr>
+                        <tr><td>21</td><td>FIKA</td></tr>
+                        <tr><td>22</td><td>HALIMATUS ZAHRO</td></tr>
+                        <tr><td>23</td><td>IFAN PRAS SETIAWAN</td></tr>
+                        <tr><td>24</td><td>JENI AULIA NURCAHYA</td></tr>
+                        <tr><td>25</td><td>M. ALI RIDHO</td></tr>
+                        <tr><td>26</td><td>MAYKO BINTANG SAPUTRA</td></tr>
+                        <tr><td>27</td><td>M. JHUVE DAVASYAH R.H</td></tr>
+                        <tr><td>28</td><td>MOCH ROIHAN SAPUTRA</td></tr>
+                        <tr><td>29</td><td>M. REZA</td></tr>
+                        <tr><td>30</td><td>M. RIZKY</td></tr>
+                        <tr><td>31</td><td>MUH. AL FARIZI</td></tr>
+                        <tr><td>32</td><td>QIAN ARIS AHMAD YANI</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -1003,129 +934,41 @@
                 <h2 class="section-title"><i class="fas fa-book"></i> Jadwal Pelajaran</h2>
             </div>
             
-            <!-- Senin -->
-            <div class="jadwal-hari fade-in">
-                <div class="hari-header">SENIN</div>
-                <div class="jadwal-grid">
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">PPKN</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Sejarah</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Selasa -->
-            <div class="jadwal-hari fade-in-delay-1">
-                <div class="hari-header">SELASA</div>
-                <div class="jadwal-grid">
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Bhs Indonesia</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Bahasa Inggris</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Rabu -->
-            <div class="jadwal-hari fade-in-delay-2">
-                <div class="hari-header">RABU</div>
-                <div class="jadwal-grid">
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Bahasa Inggris</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">PKK</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">BP/BK</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">PAI</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kamis -->
-            <div class="jadwal-hari fade-in-delay-3">
-                <div class="hari-header">KAMIS</div>
-                <div class="jadwal-grid">
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Matematika</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Bhs Arab</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Penjaskes</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Jumat -->
-            <div class="jadwal-hari fade-in">
-                <div class="hari-header">JUMAT</div>
-                <div class="jadwal-grid">
-                    <div class="mapel-item">
-                        <div class="mapel-nama">Mapel Pilihan</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">RPL</div>
-                    </div>
-                    <div class="mapel-item">
-                        <div class="mapel-nama">BMW/Pramuka</div>
-                    </div>
-                </div>
-            </div>
+            <!-- Jadwal pelajaran tetap sama -->
+            <div class="jadwal-hari fade-in"><div class="hari-header">SENIN</div><div class="jadwal-grid"><div class="mapel-item"><div class="mapel-nama">RPL</div></div><div class="mapel-item"><div class="mapel-nama">PPKN</div></div><div class="mapel-item"><div class="mapel-nama">Sejarah</div></div><div class="mapel-item"><div class="mapel-nama">RPL</div></div></div></div>
+            <div class="jadwal-hari fade-in-delay-1"><div class="hari-header">SELASA</div><div class="jadwal-grid"><div class="mapel-item"><div class="mapel-nama">RPL</div></div><div class="mapel-item"><div class="mapel-nama">Bhs Indonesia</div></div><div class="mapel-item"><div class="mapel-nama">RPL</div></div><div class="mapel-item"><div class="mapel-nama">Bahasa Inggris</div></div></div></div>
+            <div class="jadwal-hari fade-in-delay-2"><div class="hari-header">RABU</div><div class="jadwal-grid"><div class="mapel-item"><div class="mapel-nama">Bahasa Inggris</div></div><div class="mapel-item"><div class="mapel-nama">PKK</div></div><div class="mapel-item"><div class="mapel-nama">BP/BK</div></div><div class="mapel-item"><div class="mapel-nama">PAI</div></div></div></div>
+            <div class="jadwal-hari fade-in-delay-3"><div class="hari-header">KAMIS</div><div class="jadwal-grid"><div class="mapel-item"><div class="mapel-nama">Matematika</div></div><div class="mapel-item"><div class="mapel-nama">RPL</div></div><div class="mapel-item"><div class="mapel-nama">Bhs Arab</div></div><div class="mapel-item"><div class="mapel-nama">Penjaskes</div></div></div></div>
+            <div class="jadwal-hari fade-in"><div class="hari-header">JUMAT</div><div class="jadwal-grid"><div class="mapel-item"><div class="mapel-nama">Mapel Pilihan</div></div><div class="mapel-item"><div class="mapel-nama">RPL</div></div><div class="mapel-item"><div class="mapel-nama">BMW/Pramuka</div></div></div></div>
         </section>
 
-        <!-- Struktur Kelas -->
+        <!-- Struktur Kelas - DIPERBAIKI DENGAN 4 BAGIAN UTAMA -->
         <section id="struktur" class="section fade-in">
             <div class="section-header">
                 <h2 class="section-title"><i class="fas fa-sitemap"></i> Struktur Kelas</h2>
             </div>
             <div class="struktur-kelas">
-                <div class="wali-kelas fade-in">
-                    <h3>Wali Kelas</h3>
-                    <p>Bapak Fauzi</p>
-                </div>
-                <div class="ketua-kelas">
-                    <div class="ketua fade-in">
+                <div class="struktur-utama">
+                    <!-- Wali Kelas -->
+                    <div class="struktur-item wali-kelas fade-in">
+                        <h3>Wali Kelas</h3>
+                        <p>Pak Fauzi</p>
+                    </div>
+                    
+                    <!-- Ketua Kelas -->
+                    <div class="struktur-item fade-in">
                         <h3>Ketua Kelas</h3>
                         <p>QIAN ARIS AHMAD YANI</p>
                     </div>
-                    <div class="wakil fade-in-delay-1">
-                        <h3>Wakil Ketua</h3>
-                        <p>CYNTHIA WANDARI JULIANA</p>
-                    </div>
-                    <div class="wakil fade-in-delay-2">
-                        <h3>Ketua Gank</h3>
-                        <p>IFAN PRAS SETIAWAN</p>
-                    </div>
-                </div>
-                <div class="seksi">
-                    <div class="seksi-card fade-in">
+                    
+                    <!-- Sekretaris -->
+                    <div class="struktur-item fade-in-delay-1">
                         <h3>Sekretaris</h3>
                         <p>DELA AULIA SINTYA DINI</p>
                     </div>
-                    <div class="seksi-card fade-in-delay-1">
+                    
+                    <!-- Bendahara -->
+                    <div class="struktur-item fade-in-delay-2">
                         <h3>Bendahara</h3>
                         <p>AURA KASIH FARADITA</p>
                     </div>
@@ -1225,7 +1068,6 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Tambahkan kelas animasi berdasarkan posisi elemen
                     if (entry.target.classList.contains('section')) {
                         entry.target.classList.add('fade-in');
                     } else if (entry.target.classList.contains('card')) {
@@ -1236,13 +1078,7 @@
                         entry.target.classList.add('fade-in');
                     } else if (entry.target.classList.contains('mapel-item')) {
                         entry.target.classList.add('fade-in');
-                    } else if (entry.target.classList.contains('wali-kelas')) {
-                        entry.target.classList.add('fade-in');
-                    } else if (entry.target.classList.contains('ketua')) {
-                        entry.target.classList.add('fade-in');
-                    } else if (entry.target.classList.contains('wakil')) {
-                        entry.target.classList.add('fade-in');
-                    } else if (entry.target.classList.contains('seksi-card')) {
+                    } else if (entry.target.classList.contains('struktur-item')) {
                         entry.target.classList.add('fade-in');
                     }
                     
@@ -1253,46 +1089,24 @@
 
         // Observe elements that should animate on scroll
         document.addEventListener('DOMContentLoaded', () => {
-            const elementsToAnimate = document.querySelectorAll('.section, .card, .piket-card, .jadwal-hari, .mapel-item, .wali-kelas, .ketua, .wakil, .seksi-card');
+            const elementsToAnimate = document.querySelectorAll('.section, .card, .piket-card, .jadwal-hari, .mapel-item, .struktur-item');
             
             elementsToAnimate.forEach(el => {
                 observer.observe(el);
             });
             
-            // Tambahkan efek animasi khusus untuk beberapa elemen
-            const logo = document.querySelector('.logo i');
-            logo.addEventListener('mouseenter', () => {
-                logo.classList.add('rotate');
-            });
-            logo.addEventListener('mouseleave', () => {
-                logo.classList.remove('rotate');
-            });
-            
-            // Animasi untuk card dashboard saat hover
-            const dashboardCards = document.querySelectorAll('.dashboard-cards .card');
-            dashboardCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.classList.add('pulse');
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.classList.remove('pulse');
-                });
-            });
-            
-            // Animasi untuk tombol menu mobile
-            mobileMenuBtn.addEventListener('mouseenter', () => {
-                mobileMenuBtn.classList.add('bounce');
-            });
-            mobileMenuBtn.addEventListener('mouseleave', () => {
-                mobileMenuBtn.classList.remove('bounce');
-            });
-            
-            // Animasi untuk tabel data siswa
-            const tableRows = document.querySelectorAll('#siswa tbody tr');
-            tableRows.forEach((row, index) => {
-                row.style.animationDelay = `${index * 0.05}s`;
-                row.classList.add('fade-in');
-            });
+            // Buat bintang-bintang yang sederhana
+            const starsBackground = document.getElementById('starsBackground');
+            for (let i = 0; i < 80; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 2 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.opacity = Math.random() * 0.5 + 0.2;
+                starsBackground.appendChild(star);
+            }
         });
     </script>
 </body>
