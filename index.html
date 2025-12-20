@@ -793,6 +793,7 @@
         .social-links {
             display: flex;
             gap: 12px;
+            align-items: center;
         }
         
         .social-link {
@@ -813,6 +814,17 @@
             background: var(--glass-hover);
             color: var(--light);
             transform: translateY(-2px);
+        }
+        
+        .instagram-name {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-left: 8px;
         }
         
         .contact-link {
@@ -918,6 +930,17 @@
             
             .jadwal-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .instagram-name {
+                margin-left: 0;
+                margin-top: 8px;
             }
         }
         
@@ -1312,9 +1335,10 @@
                     <div class="footer-column">
                         <h3 class="footer-title">Tentang Kami</h3>
                         <p>Kelas XI RPL 2 SMK Negeri 6 Jember. Komunitas belajar yang berfokus pada pengembangan skill teknologi informasi dan rekayasa perangkat lunak.</p>
-                       <div class="social-links">
-                            <a href="https://www.instagram.com/softtwo2_" class="social-link">
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/softtwo2_" class="social-link" title="Kunjungi Instagram Kelas">
                                 <i class="fab fa-instagram"></i>
+                                <span class="instagram-name">@softtwo2_</span>
                             </a>
                         </div>
                     </div>
